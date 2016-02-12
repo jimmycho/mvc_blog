@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="model.bbs.BbsDTO" %> 
+<%@ page import="model.bbs.BbsDTO" %>
 <% request.setCharacterEncoding("utf-8"); 
  
  String col=request.getParameter("col");
@@ -30,18 +30,18 @@
  
 <FORM name='frm' method='post'  
       action='./replyProc.do'> 
-  <input type='hidden' name='bbsno' value='<%=request.getParameter("bbsno")%>'> 
-  <input type='hidden' name='grpno' value='<%=dto.getGrpno()%>'> 
-  <input type='hidden' name='indent' value='<%=dto.getIndent()%>'> 
-  <input type='hidden' name='ansnum' value='<%=dto.getAnsnum()%>'>
+  <input type='hidden' name='bbsno' value='${param.bbsno}'> 
+  <input type='hidden' name='grpno' value='${dto.grpno}'> 
+  <input type='hidden' name='indent' value='${dto.indent}'> 
+  <input type='hidden' name='ansnum' value='${dto.ansnum}'>
    
-  <input type='hidden' name='col' size='30' value='<%=col %>'>
-  <input type='hidden' name='word' size='30' value='<%=word %>'>
-  <input type='hidden' name='nowPage' size='30' value='<%=nowPage %>'>
+  <input type='hidden' name='col' size='30' value='${param.col }'>
+  <input type='hidden' name='word' size='30' value='${param.word }'>
+  <input type='hidden' name='nowPage' size='30' value='${param.nowPage }'>
   <TABLE align='center'> 
     <TR> 
       <TH>제목</TH> 
-      <TD><input type='text' name='title' value='<%=dto.getTitle()%>' size='50'></TD> 
+      <TD><input type='text' name='title' value='${dto.title}' size='50'></TD> 
     </TR> 
     <TR> 
       <TH>내용</TH> 
