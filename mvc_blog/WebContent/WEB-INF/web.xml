@@ -10,7 +10,7 @@
 
 		<init-param>
 			<param-name>configFile</param-name>
-			<param-value>D:/egov201601/web/workspace_mvc/mvc_blog/WebContent/WEB-INF/config/action-config.properties</param-value>
+			<param-value>D:/egov201601/git/mvc_blog/WebContent/WEB-INF/config/action-config.properties</param-value>
 		</init-param>
 		<init-param>
 			<param-name>templatePage</param-name>

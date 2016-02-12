@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
-<% 
+<%-- <% 
 int cnt =(Integer) request.getAttribute("cnt");
-%>
+%> --%>
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html> 
@@ -24,13 +25,21 @@ int cnt =(Integer) request.getAttribute("cnt");
 <DIV class='title'>처리 결과</DIV>
  
 <DIV class='content'>
-  <%
+<%--   <%
   if (cnt == 1){
     out.println("글을 게시판에 등록했습니다.");
   }else{
     out.println("게시판 등록에 실패했습니다.");
   }
-  %>
+  %> --%>
+<c:choose>
+<c:when test="${cnt==1}">
+글을 게시판에 등록했습니다.
+</c:when>
+<c:otherwise>
+게시판 등록에 실패했습니다.
+</c:otherwise>
+</c:choose>  
 </DIV>
  
 <DIV class='bottom'>

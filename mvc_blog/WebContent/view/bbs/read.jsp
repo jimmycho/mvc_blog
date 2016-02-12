@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="model.bbs.*"%>
+<%-- <%@ page import="model.bbs.*"}
 
 <%
 	int bbsno = Integer.parseInt(request.getParameter("bbsno"));
@@ -7,7 +7,7 @@
 	String word = request.getParameter("word");
 	String nowPage = request.getParameter("nowPage");
 	BbsDTO dto = (BbsDTO) request.getAttribute("dto");
-%>
+} --%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,34 +24,34 @@
 
 <script type="text/javascript">
 function listB(){
-	var url="list.do?col=<%=col%>";
-	url += "&word=<%=word%>";
-	url += "&nowPage=<%=nowPage%>";
+	var url="list.do?col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
 	
 	location.href=url;
 }
 function updateB(){
-	var url="updateForm.do?bbsno=<%=bbsno%>";
-	url += "&col=<%=col%>";
-	url += "&word=<%=word%>";
-	url += "&nowPage=<%=nowPage%>";
+	var url="updateForm.do?bbsno=${param.bbsno}";
+	url += "&col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
 	
 	location.href=url;
 }
 function deleteB(){
-	var url="delete.do?bbsno=<%=bbsno%>";
-	url += "&col=<%=col%>";
-	url += "&word=<%=word%>";
-	url += "&nowPage=<%=nowPage%>";
+	var url="delete.do?bbsno=${param.bbsno}";
+	url += "&col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
 	
 	location.href=url;	
 }
 
 function reply(){
-	var url="reply.do?bbsno=<%=bbsno%>";
-	url += "&col=<%=col%>";
-	url += "&word=<%=word%>";
-	url += "&nowPage=<%=nowPage%>";
+	var url="reply.do?bbsno=${param.bbsno}";
+	url += "&col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
 	
 	location.href=url;	
 }
@@ -65,32 +65,31 @@ function reply(){
 	<TABLE align='center' border='1px' cellpadding='10px' cellspacing='0px'>
 		<TR>
 			<TH>제목</TH>
-			<TD><%=dto.getTitle()%></TD>
+			<TD>${dto.title}</TD>
 		</TR>
 		<TR>
 			<TH>내용</TH>
-			<TD><%=dto.getContent()%></TD>
+			<TD>${dto.content}</TD>
 		</TR>
 		<TR>
 			<TH>성명</TH>
-			<TD><%=dto.getWname()%></TD>
+			<TD>${dto.wname}</TD>
 		</TR>
 		<TR>
 			<TH>조회수</TH>
-			<TD><%=dto.getViewcnt()%></TD>
+			<TD>${dto.viewcnt}</TD>
 		</TR>
 		<TR>
 			<TH>등록일</TH>
-			<TD><%=dto.getWdate()%></TD>
+			<TD>${dto.wdate}</TD>
 		</TR>
 	</TABLE>
 	<DIV style='text-align: center; margin-top: 20px'>
-		<input type='button' value='등록'
-			onclick="location.href='./createForm.do'"> <input
-			type='button' value='목록' onclick="listB()"> <input
-			type='button' value='수정' onclick="updateB()"> <input
-			type='button' value='삭제' onclick="deleteB()"> <input
-			type='button' value='답글' onclick="reply()">
+		<input type='button' value='등록'	onclick="location.href='./createForm.do'"> 
+		<input type='button' value='목록' onclick="listB()"> 
+		<input type='button' value='수정' onclick="updateB()"> 
+		<input type='button' value='삭제' onclick="deleteB()"> 
+		<input type='button' value='답글' onclick="reply()">
 	</DIV>
 </body>
 </html>
