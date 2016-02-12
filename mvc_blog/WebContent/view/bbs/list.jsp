@@ -22,7 +22,7 @@ String paging=(String)request.getAttribute("paging");
 <style type="text/css">
 * {
 	font-family: gulim;
-	font-size: 24px;
+	font-size: 15px;
 }
 </style>
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
@@ -124,7 +124,7 @@ function read(bbsno){
 	</TABLE>
 	<DIV style='text-align: center; margin-top: 20px'>
 		<input type='button' value='등록'
-			onclick="location.href='./createForm.do'">
+			onclick="location.href='./create.do'">
 		${paging }
 	</DIV>
 </body>
