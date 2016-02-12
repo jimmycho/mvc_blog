@@ -1,0 +1,121 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page import="java.util.*,model.bbs.*,utility.*"%>
+<% request.setCharacterEncoding("utf-8"); %>
+<%
+//---------------------------------------------------------------------------------- 
+//검색 관련 부분 
+//---------------------------------------------------------------------------------- 
+//검색어 추출, null --> "" 
+String col = (String)request.getAttribute("col");
+String word = (String)request.getAttribute("word");
+int nowPage=(Integer)request.getAttribute("nowPage");
+List<BbsDTO> list = (List)request.getAttribute("list");
+String paging=(String)request.getAttribute("paging");
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+* {
+	font-family: gulim;
+	font-size: 24px;
+}
+</style>
+<link href="../css/style.css" rel="Stylesheet" type="text/css">
+
+<script type="text/javascript">
+function read(bbsno){
+	var url = "read.do?bbsno="+bbsno;
+	url = url +"&col=<%=col%>";
+	url = url +"&word=<%=word%>";
+	url = url +"&nowPage=<%=nowPage%>";
+	
+	location.href=url;
+	
+}
+</script>
+</head>
+<body>
+
+	<DIV class='title'>게시판 목록</DIV>
+
+	<DIV style='width: 80%; text-align: center; margin: 1px auto;'>
+		<FORM name='frm' method='post' action="./list.do">
+			<SELECT name='col'>
+				<!-- 검색할 컬럼 -->
+				<OPTION value='wname'
+					<% if (col.equals("wname") ) out.print("selected='selected'"); %>>성
+					명</OPTION>
+				<OPTION value='title'
+					<% if (col.equals("title") ) out.print("selected='selected'"); %>>제
+					목</OPTION>
+				<OPTION value='content'
+					<% if (col.equals("content") ) out.print("selected='selected'"); %>>내
+					용</OPTION>
+				<OPTION value='total'>전체출력</OPTION>
+			</SELECT> <input type='text' name='word' value='<%=word %>'>
+			<!-- 검색어 -->
+			<input type='submit' value='검색'> <input type='button'
+				value='등록' onclick="location.href='./createForm.do'">
+		</FORM>
+	</DIV>
+	<TABLE class='table'>
+		<TR>
+			<TH>번호</TH>
+			<TH>제목</TH>
+			<TH>성명</TH>
+			<TH>조회수</TH>
+			<TH>등록일</TH>
+			<TH>grpno</TH>
+			<TH>indent</TH>
+			<TH>ansnum</TH>
+		</TR>
+		<%
+  if (list.size() == 0){
+  %>
+		<TR>
+			<TD colspan='8' align='center'>등록된 글이 없습니다.</TD>
+		</TR>
+		<%
+  }else{
+    for(int index=0; index <list.size(); index++){
+      BbsDTO dto = list.get(index);
+      
+    %>
+		<TR>
+			<TD><%=dto.getBbsno() %></TD>
+			<TD>
+				<% 
+          if(dto.getIndent()>0) { 
+        	for(int j=0; j<dto.getIndent(); j++) {
+               out.print("&nbsp;&nbsp;");
+            }
+            out.print("[답변]");
+          }
+        %> <A href="javascript:read('<%=dto.getBbsno() %>')"> <%=dto.getTitle() %>
+			</A> <% if(Utility.compareDay(dto.getWdate().substring(0,10))){ %> <img
+				src="../images/new.gif"> <% } %>
+
+			</TD>
+			<TD><%=dto.getWname() %></TD>
+			<TD><%=dto.getViewcnt() %></TD>
+			<TD><%=dto.getWdate().substring(0, 10) %></TD>
+			<TD><%=dto.getGrpno() %></TD>
+			<TD><%=dto.getIndent() %></TD>
+			<TD><%=dto.getAnsnum() %></TD>
+		</TR>
+		<%
+    }; // for END
+  } // if END
+  %>
+	</TABLE>
+	<DIV style='text-align: center; margin-top: 20px'>
+		<input type='button' value='등록'
+			onclick="location.href='./createForm.do'">
+		<%=paging %>
+	</DIV>
+</body>
+</html>
